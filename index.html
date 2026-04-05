@@ -719,6 +719,111 @@
             .education-sidebar {
                 margin-top: 2rem;
             }
+            .about-highlights {
+                flex-direction: column;
+            }
+        }
+
+        .about-highlights {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 2rem;
+            justify-content: space-between;
+        }
+
+        .highlight-card {
+            flex: 1;
+            padding: 1.25rem;
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+        }
+
+        .highlight-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+        
+        .icon-circle {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+        
+        .backend-icon {
+            background: linear-gradient(135deg, #00f5d4, #00bbf9);
+            color: #0a0a0a;
+        }
+        
+        .data-icon {
+            background: linear-gradient(135deg, #ff6b6b, #feca57);
+            color: #1a1a1a;
+        }
+        
+        .icon-circle svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .backend-highlight {
+            background: linear-gradient(135deg, #101010 0%, #1a1a2e 100%);
+            color: #64b5f6;
+            border: 1px solid rgba(100, 181, 246, 0.4);
+        }
+        
+        .backend-highlight h3 {
+            color: #64b5f6;
+            margin: 0;
+            font-size: 1.05rem;
+        }
+
+        .data-highlight {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: #2c3e50;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+        }
+        
+        .data-highlight h3 {
+            color: #2c3e50;
+            margin: 0;
+            font-size: 1.05rem;
+        }
+
+        body.light-mode .highlight-card {
+            border: 2px solid #B0DB9C !important;
+            animation: blinkingGreenBorder 0.8s infinite alternate !important;
+        }
+
+        body.light-mode .backend-highlight {
+            background: linear-gradient(135deg, #1a2980 0%, #26d0ce 100%) !important;
+            color: #ffffff !important;
+        }
+        body.light-mode .backend-highlight h3, 
+        body.light-mode .backend-highlight p {
+            color: #ffffff !important;
+        }
+
+        body.light-mode .data-highlight {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%) !important;
+            color: #000000 !important;
+        }
+        body.light-mode .data-highlight h3, 
+        body.light-mode .data-highlight p {
+            color: #000000 !important;
         }
 
         .about-stats {
@@ -1558,7 +1663,8 @@
                 <div class="hero-text">
                     <h1>Hello,</h1>
                     <h1>I'm <span class="blinking-text">GIRITHARAN <span class="initial-letter">D</span></span></h1>
-                    <h2>Data Analyst</h2>
+                    <h2>Backend Developer |Data Analyst</h2>
+                    <p>Crafting scalable backend systems with efficient logic.</p>
                     <p>Passionate about turning data into meaningful insights that drive smart decisions.</p>
                     <div class="cta-buttons">
                         <a href="#contact" class="btn btn-primary">Contact Me</a>
@@ -1587,8 +1693,28 @@
             <h2 class="section-title">About Me</h2>
             <div class="about-content">
                 <div class="about-text">
-                    <p>I am a passionate data analyst with hands-on experience in Python, SQL, Excel and Power BI. I love exploring data and finding patterns that can help solve real-world problems. My strength lies in breaking down complex data into clear, easy-to-understand insights that support smart decisions. I believe data has the power to tell meaningful stories.</p>
-                    <p>I'm always excited to learn new tools and techniques that improve how we understand and use data. Working in a team motivates me, especially when we collaborate to solve challenges and improve results. My goal is to keep growing as a data analyst and contribute to projects that make a positive impact on the organization.</p>
+                    <p>I am a Backend Developer who enjoys building fast and reliable applications. I work with FastAPI and Flask to create clean and scalable APIs. I have hands-on experience using MongoDB Atlas and MongoDB Compass for managing databases and handling real-time data. I focus on writing efficient backend logic that makes applications run smoothly.</p>
+                    <p>I am also a Data Analyst who likes working with data to find useful insights. I use Python, SQL, Excel, and Power BI to analyze data and present it in a simple and clear way. I enjoy turning raw data into meaningful information that helps in making better decisions. I am always learning and improving my skills in both backend development and data analysis.</p>
+                    
+                    <!-- Highlights Added -->
+                    <div class="about-highlights">
+                        <div class="highlight-card backend-highlight">
+                            <div class="card-content">
+                                <div class="icon-circle backend-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+                                </div>
+                                <h3>Backend Optimization</h3>
+                            </div>
+                        </div>
+                        <div class="highlight-card data-highlight">
+                            <div class="card-content">
+                                <div class="icon-circle data-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 20V10"></path><path d="M12 20V4"></path><path d="M6 20v-4"></path></svg>
+                                </div>
+                                <h3>Data Visualization</h3>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="education-sidebar">
                     <h3>Education</h3>
@@ -1596,7 +1722,7 @@
                         <div class="education-date">2023 - 2027</div>
                         <div class="education-title">Bachelor of Artificial Intelligence</div>
                         <div class="education-institution">M Kumarasamy College Of Engineering</div>
-                        <div class="education-detail">CGPA: 7.740/10</div>
+                        <div class="education-detail">CGPA: 7.75/10</div>
                     </div>
                     <div class="education-item">
                         <div class="education-date">2021 - 2023</div>
@@ -1607,6 +1733,7 @@
 
                 </div>
             </div>
+
         </div>
     </section>
 
