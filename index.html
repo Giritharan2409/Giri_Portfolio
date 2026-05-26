@@ -97,7 +97,11 @@
         }
 
         /* Enforce high contrast background colors for all sections */
-        body.light-mode,
+        body.light-mode {
+            background: linear-gradient(135deg, #ECFAE5 0%, #DDF6D2 50%, #CAE8BD 100%) !important;
+            color: #000000 !important;
+        }
+
         body.light-mode #home,
         body.light-mode #about,
         body.light-mode #education,
@@ -106,8 +110,13 @@
         body.light-mode #certificates,
         body.light-mode #contact,
         body.light-mode .footer {
-            background: linear-gradient(135deg, #ECFAE5 0%, #DDF6D2 50%, #CAE8BD 100%) !important;
+            background: transparent !important;
             color: #000000 !important;
+        }
+
+        body.light-mode #particles-js canvas {
+            filter: brightness(0.3) contrast(2) saturate(3) !important;
+            opacity: 1 !important;
         }
 
         /* Enforce high contrast text colors for elements that inherit differently */
@@ -388,6 +397,28 @@
             background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
             color: #e8e8e8;
             text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #home .container {
+            position: relative;
+            z-index: 2;
+        }
+
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 0;
+        }
+
+        #home, #about, #skills, #projects, #certificates, #contact, .footer {
+            background: transparent !important;
+            position: relative;
+            z-index: 1;
         }
 
         .hero-content {
@@ -1630,6 +1661,7 @@
     </style>
 </head>
 <body>
+    <div id="particles-js"></div>
 
     <!-- Navigation -->
     <nav class="navbar">
@@ -2483,7 +2515,7 @@
         // Theme toggle functionality
         const themeToggle = document.getElementById('theme-toggle');
         
-        themeToggle.addEventListener('click', () => {
+        themeToggle.addEventListener('click', (e) => {
             document.body.classList.toggle('light-mode');
             const statusText = themeToggle.querySelector('.status-text');
             // Simply toggle mode cleanly without overwriting the inner HTML
@@ -2493,6 +2525,22 @@
             } else {
                 themeToggle.title = 'Switch to Light Mode';
                 if (statusText) statusText.textContent = 'ON';
+                
+                // Golden blasting animation for dark mode
+                if (typeof confetti === 'function') {
+                    const rect = themeToggle.getBoundingClientRect();
+                    const originX = (rect.left + rect.width / 2) / window.innerWidth;
+                    const originY = (rect.top + rect.height / 2) / window.innerHeight;
+                    
+                    confetti({
+                        particleCount: 150,
+                        spread: 100,
+                        origin: { x: originX, y: originY },
+                        colors: ['#FFD700', '#FFA500', '#FF8C00', '#B8860B', '#FFF8DC'],
+                        disableForReducedMotion: true,
+                        zIndex: 2000
+                    });
+                }
             }
         });
         
@@ -2503,6 +2551,96 @@
                 const originalText = heroTitle.textContent;
                 typeWriter(heroTitle, originalText, 100);
             }
+        });
+    </script>
+    
+    <!-- Canvas Confetti for Blast Animation -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <!-- Particles.js -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        particlesJS('particles-js', {
+            "particles": {
+                "number": {
+                    "value": 80,
+                    "density": {
+                        "enable": true,
+                        "value_area": 800
+                    }
+                },
+                "color": {
+                    "value": "#64b5f6"
+                },
+                "shape": {
+                    "type": "circle",
+                    "stroke": {
+                        "width": 0,
+                        "color": "#000000"
+                    }
+                },
+                "opacity": {
+                    "value": 0.5,
+                    "random": false,
+                    "anim": {
+                        "enable": false
+                    }
+                },
+                "size": {
+                    "value": 3,
+                    "random": true,
+                    "anim": {
+                        "enable": false
+                    }
+                },
+                "line_linked": {
+                    "enable": true,
+                    "distance": 150,
+                    "color": "#64b5f6",
+                    "opacity": 0.4,
+                    "width": 1
+                },
+                "move": {
+                    "enable": true,
+                    "speed": 2,
+                    "direction": "none",
+                    "random": false,
+                    "straight": false,
+                    "out_mode": "out",
+                    "bounce": false,
+                    "attract": {
+                        "enable": false,
+                        "rotateX": 600,
+                        "rotateY": 1200
+                    }
+                }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": {
+                    "onhover": {
+                        "enable": true,
+                        "mode": "grab"
+                    },
+                    "onclick": {
+                        "enable": true,
+                        "mode": "push"
+                    },
+                    "resize": true
+                },
+                "modes": {
+                    "grab": {
+                        "distance": 140,
+                        "line_linked": {
+                            "opacity": 1
+                        }
+                    },
+                    "push": {
+                        "particles_nb": 4
+                    }
+                }
+            },
+            "retina_detect": true
         });
     </script>
 </body>
