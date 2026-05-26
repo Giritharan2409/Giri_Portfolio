@@ -1738,101 +1738,360 @@
     </section>
 
     <!-- Skills Section -->
-    <section id="skills">
+    <section id="skills" class="skills-section">
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
+        <style>
+            .skills-wrapper-dual {
+                display: flex;
+                gap: 3rem;
+                max-width: 1200px;
+                margin: 0 auto;
+                align-items: flex-start;
+                padding: 2rem 1rem;
+            }
+            .skills-chart-pane {
+                flex: 1;
+                min-width: 320px;
+                background: rgba(30, 30, 46, 0.4);
+                border: 1px solid rgba(255, 255, 255, 0.05);
+                border-radius: 20px;
+                padding: 2rem;
+                backdrop-filter: blur(10px);
+                position: sticky;
+                top: 100px;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            }
+            .skills-tabs-pane {
+                flex: 1.5;
+                min-width: 320px;
+            }
+            @media (max-width: 900px) {
+                .skills-wrapper-dual {
+                    flex-direction: column;
+                }
+                .skills-chart-pane {
+                    position: static;
+                    width: 100%;
+                }
+            }
+            
+            .skills-tabs {
+                display: flex;
+                justify-content: center;
+                gap: 1rem;
+                flex-wrap: wrap;
+                margin-bottom: 2.5rem;
+            }
+            .skill-tab {
+                background: rgba(30, 30, 46, 0.4);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                padding: 0.8rem 1.8rem;
+                border-radius: 50px;
+                color: #e2e8f0;
+                font-size: 0.95rem;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                font-weight: 500;
+            }
+            .skill-tab:hover {
+                background: rgba(255, 255, 255, 0.1);
+            }
+            .skill-tab.active {
+                background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+                color: #fff;
+                border-color: transparent;
+                box-shadow: 0 4px 15px rgba(0, 242, 254, 0.3);
+            }
+            .skill-pane {
+                display: none;
+                animation: fadeInTab 0.4s ease-out forwards;
+            }
+            .skill-pane.active {
+                display: block;
+            }
+            @keyframes fadeInTab {
+                from { opacity: 0; transform: translateY(15px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+            .skill-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+                gap: 1.2rem;
+            }
+            .skill-box {
+                background: rgba(30, 30, 46, 0.5);
+                border: 1px solid rgba(255, 255, 255, 0.05);
+                border-radius: 16px;
+                padding: 1.8rem 1rem;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 12px;
+                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                backdrop-filter: blur(10px);
+            }
+            .skill-box:hover {
+                transform: translateY(-8px);
+                background: rgba(40, 40, 60, 0.8);
+                border-color: rgba(0, 242, 254, 0.4);
+                box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            }
+            .skill-box i {
+                font-size: 3rem;
+            }
+            .skill-box .emoji-icon {
+                font-size: 2.5rem;
+                line-height: 1;
+            }
+            .skill-box span {
+                color: #fff;
+                font-weight: 500;
+                font-size: 0.95rem;
+                text-align: center;
+                letter-spacing: 0.5px;
+            }
+
+            /* Light Mode Overrides for Skills Section */
+            body.light-mode .skills-chart-pane {
+                background: rgba(255, 255, 255, 0.7);
+                border: 1px solid rgba(0, 0, 0, 0.1);
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            }
+            body.light-mode .skills-chart-pane h3 {
+                color: #222 !important;
+            }
+            body.light-mode .skill-box {
+                background: rgba(255, 255, 255, 0.8);
+                border: 1px solid rgba(0, 0, 0, 0.1);
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+            }
+            body.light-mode .skill-box:hover {
+                background: rgba(255, 255, 255, 1);
+                border-color: #B0DB9C;
+                box-shadow: 0 10px 25px rgba(176, 219, 156, 0.4);
+                transform: translateY(-8px);
+            }
+            body.light-mode .skill-box span {
+                color: #222;
+            }
+            body.light-mode .skill-tab {
+                background: rgba(255, 255, 255, 0.6);
+                border: 1px solid rgba(0, 0, 0, 0.1);
+                color: #444;
+            }
+            body.light-mode .skill-tab:hover {
+                background: rgba(255, 255, 255, 0.9);
+            }
+            body.light-mode .skill-tab.active {
+                background: linear-gradient(135deg, #1976d2, #64b5f6);
+                color: #fff;
+                border-color: transparent;
+                box-shadow: 0 4px 15px rgba(25, 118, 210, 0.3);
+            }
+        </style>
+        
         <div class="container">
             <h2 class="section-title">Skills</h2>
-            <div class="skills-card">
-                <!-- Left Column -->
-                <div class="skills-column">
-                    <!-- Programming Languages -->
-                    <div class="skill-category">
-                        <h2>Technical Skills</h2>
-                        <h3>Programming Languages</h3>
-                        <div class="skills-grid">
-                            <div class="skill-item">
-                                <div class="skill-info">
-                                    <span>Python</span>
-                                </div>
-                            </div>
-                            <div class="skill-item">
-                                <div class="skill-info">
-                                    <span>Java</span>
-                                </div>
-                            </div>
-                            <div class="skill-item">
-                                <div class="skill-info">
-                                    <span>C</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Database -->
-                    <div class="skill-category">
-                        <h3>Database</h3>
-                        <div class="skills-grid" style="justify-items: center;">
-                            <div class="skill-item" style="width: 100%; max-width: 200px; display: inline-block; margin-right: 16px;">
-                                <div class="skill-info">
-                                    <span>MySQL</span>
-                                </div>
-                            </div>
-                            <div class="skill-item" style="width: 100%; max-width: 200px; display: inline-block;">
-                                <div class="skill-info">
-                                    <span>Mongo DB</span>
-                                </div>
-                            </div>
-                        </div>
+
+            <div class="skills-wrapper-dual">
+                
+                <!-- Left: Interactive Radar Chart -->
+                <div class="skills-chart-pane">
+                    <h3 style="color: #fff; margin-bottom: 20px; font-weight: 500; text-align: center; font-size: 1.3rem;">Proficiency Overview</h3>
+                    <div style="position: relative; width: 100%; height: 320px;">
+                        <canvas id="skillsRadarChart"></canvas>
                     </div>
                 </div>
-                
-                <!-- Right Column -->
-                <div class="skills-column">
-                    <!-- Tools -->
-                    <div class="skill-category">
-                        <h3>Tools</h3>
-                        <div class="skills-grid">
-                            <div class="skill-item" style="width: 100%; max-width: 200px; display: inline-block; margin-right: 16px;">
-                                <div class="skill-info">
-                                    <span>Power BI</span>
-                                </div>
-                            </div>
-                            <div class="skill-item" style="width: 100%; max-width: 200px; display: inline-block; margin-right: 16px;">
-                                <div class="skill-info">
-                                    <span>Excel</span>
-                                </div>
-                            </div>
-                            <div class="skill-item" style="width: 100%; max-width: 200px; display: inline-block;">
-                                <div class="skill-info">
-                                    <span>Git & Github</span>
-                                </div>
+
+                <!-- Right: Organized Tabbed Skills -->
+                <div class="skills-tabs-pane">
+                    <div class="skills-tabs">
+                        <button class="skill-tab active" data-target="pane-programming">Programming</button>
+                        <button class="skill-tab" data-target="pane-databases">Databases</button>
+                        <button class="skill-tab" data-target="pane-tools">Tools</button>
+                        <button class="skill-tab" data-target="pane-libraries">Libraries</button>
+                        <button class="skill-tab" data-target="pane-soft">Soft Skills</button>
+                    </div>
+
+                    <div class="skills-content">
+                        <!-- Programming -->
+                        <div class="skill-pane active" id="pane-programming">
+                            <div class="skill-grid">
+                                <div class="skill-box"><i class="devicon-java-plain colored"></i><span>Java</span></div>
+                                <div class="skill-box"><i class="devicon-python-plain colored"></i><span>Python</span></div>
+                                <div class="skill-box"><i class="devicon-html5-plain colored"></i><span>HTML</span></div>
+                                <div class="skill-box"><i class="devicon-css3-plain colored"></i><span>CSS</span></div>
+                                <div class="skill-box"><i class="devicon-javascript-plain colored"></i><span>JavaScript</span></div>
                             </div>
                         </div>
-                    </div>
-                    
-                    <!-- Soft Skills -->
-                    <div class="skill-category">
-                        <h2>Soft Skills</h2>
-                        <div class="skills-grid">
-                            <div class="skill-item">
-                                <div class="skill-info">
-                                    <span>Quick Refocusing</span>
-                                </div>
+
+                        <!-- Databases -->
+                        <div class="skill-pane" id="pane-databases">
+                            <div class="skill-grid">
+                                <div class="skill-box"><i class="devicon-mysql-plain colored"></i><span>MySQL</span></div>
+                                <div class="skill-box"><i class="devicon-mongodb-plain colored"></i><span>Mongo DB</span></div>
                             </div>
-                            <div class="skill-item">
-                                <div class="skill-info">
-                                    <span>Adaptability</span>
-                                </div>
+                        </div>
+
+                        <!-- Tools -->
+                        <div class="skill-pane" id="pane-tools">
+                            <div class="skill-grid">
+                                <div class="skill-box"><i class="devicon-git-plain colored"></i><span>Git & Github</span></div>
+                                <div class="skill-box"><div class="emoji-icon">📊</div><span>Power BI</span></div>
+                                <div class="skill-box"><div class="emoji-icon">📗</div><span>MS Excel</span></div>
+                                <div class="skill-box"><i class="devicon-vscode-plain colored"></i><span>VS Code</span></div>
+                                <div class="skill-box"><i class="devicon-jupyter-plain colored"></i><span>Jupyter</span></div>
                             </div>
-                            <div class="skill-item">
-                                <div class="skill-info">
-                                    <span>Critical Thinking</span>
-                                </div>
+                        </div>
+
+                        <!-- Libraries -->
+                        <div class="skill-pane" id="pane-libraries">
+                            <div class="skill-grid">
+                                <div class="skill-box"><i class="devicon-numpy-plain colored"></i><span>Numpy</span></div>
+                                <div class="skill-box"><i class="devicon-pandas-plain colored"></i><span>Pandas</span></div>
+                                <div class="skill-box"><i class="devicon-matplotlib-plain colored"></i><span>Matplotlib</span></div>
+                                <div class="skill-box"><i class="devicon-flask-original colored"></i><span>Flask</span></div>
+                                <div class="skill-box"><i class="devicon-fastapi-plain colored"></i><span>Fast API</span></div>
+                                <div class="skill-box"><div class="emoji-icon">🌐</div><span>Rest API</span></div>
+                                <div class="skill-box"><i class="devicon-scikitlearn-plain colored"></i><span>Scikit Learn</span></div>
+                            </div>
+                        </div>
+
+                        <!-- Soft Skills -->
+                        <div class="skill-pane" id="pane-soft">
+                            <div class="skill-grid">
+                                <div class="skill-box"><div class="emoji-icon">🎯</div><span>Quick Refocusing</span></div>
+                                <div class="skill-box"><div class="emoji-icon">🌊</div><span>Adaptability</span></div>
+                                <div class="skill-box"><div class="emoji-icon">🧠</div><span>Critical Thinking</span></div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                // Tab functionality
+                const tabs = document.querySelectorAll('.skill-tab');
+                const panes = document.querySelectorAll('.skill-pane');
+
+                tabs.forEach(tab => {
+                    tab.addEventListener('click', () => {
+                        tabs.forEach(t => t.classList.remove('active'));
+                        panes.forEach(p => p.classList.remove('active'));
+
+                        tab.classList.add('active');
+                        const targetPane = document.getElementById(tab.getAttribute('data-target'));
+                        if (targetPane) {
+                            targetPane.classList.add('active');
+                        }
+                    });
+                });
+
+                // Chart functionality
+                const ctx = document.getElementById('skillsRadarChart').getContext('2d');
+                
+                Chart.defaults.font.family = "'Inter', 'Segoe UI', sans-serif";
+                
+                const getChartTextColor = () => document.body.classList.contains('light-mode') ? '#222' : '#e2e8f0';
+                const getChartGridColor = () => document.body.classList.contains('light-mode') ? 'rgba(0, 0, 0, 0.1)' : 'rgba(255, 255, 255, 0.1)';
+
+                const radarChart = new Chart(ctx, {
+                    type: 'radar',
+                    data: {
+                        labels: ['Programming', 'Databases', 'Tools', 'Libraries', 'Soft Skills'],
+                        datasets: [{
+                            label: 'Proficiency',
+                            data: [90, 85, 95, 80, 95],
+                            backgroundColor: 'rgba(0, 242, 254, 0.25)',
+                            borderColor: '#00f2fe',
+                            pointBackgroundColor: ['#ff0844', '#ff0844', '#ff0844', '#ff0844', '#ff0844'],
+                            pointBorderColor: ['#fff', '#fff', '#fff', '#fff', '#fff'],
+                            pointHoverBackgroundColor: '#fff',
+                            pointHoverBorderColor: '#ff0844',
+                            borderWidth: 2,
+                            pointRadius: [4, 4, 4, 4, 4],
+                            pointHoverRadius: 6
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            r: {
+                                angleLines: { 
+                                    color: getChartGridColor()
+                                },
+                                grid: { 
+                                    color: getChartGridColor()
+                                },
+                                pointLabels: { 
+                                    color: getChartTextColor(),
+                                    font: { 
+                                        size: 13, 
+                                        weight: '600'
+                                    } 
+                                },
+                                ticks: { 
+                                    display: false, 
+                                    min: 0, 
+                                    max: 100,
+                                    stepSize: 20
+                                }
+                            }
+                        },
+                        plugins: {
+                            legend: { 
+                                display: false 
+                            },
+                            tooltip: {
+                                backgroundColor: 'rgba(15, 15, 35, 0.9)',
+                                titleColor: '#fff',
+                                bodyColor: '#00f2fe',
+                                borderColor: 'rgba(255, 255, 255, 0.1)',
+                                borderWidth: 1,
+                                padding: 10,
+                                displayColors: false
+                            }
+                        },
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        animation: {
+                            duration: 2000,
+                            easing: 'easeOutQuart'
+                        }
+                    }
+                });
+
+                // Observe light mode changes to update chart colors dynamically
+                const observer = new MutationObserver(() => {
+                    radarChart.options.scales.r.angleLines.color = getChartGridColor();
+                    radarChart.options.scales.r.grid.color = getChartGridColor();
+                    radarChart.options.scales.r.pointLabels.color = getChartTextColor();
+                    radarChart.update();
+                });
+                observer.observe(document.body, { attributes: true, attributeFilter: ['class'] });
+
+                // Unique Blinking/Scanning Effect for Radar Chart Nodes
+                let activeNodeIndex = 0;
+                setInterval(() => {
+                    if (!radarChart.data.datasets[0]) return;
+                    // Reset all nodes to default
+                    radarChart.data.datasets[0].pointRadius = [4, 4, 4, 4, 4];
+                    radarChart.data.datasets[0].pointBackgroundColor = ['#ff0844', '#ff0844', '#ff0844', '#ff0844', '#ff0844'];
+                    
+                    // Emphasize current node (Blinking effect)
+                    radarChart.data.datasets[0].pointRadius[activeNodeIndex] = 9;
+                    radarChart.data.datasets[0].pointBackgroundColor[activeNodeIndex] = '#00f2fe';
+                    
+                    radarChart.update('none'); // Update without full animation for performance
+                    
+                    // Move to next node
+                    activeNodeIndex = (activeNodeIndex + 1) % 5;
+                }, 1200); // Blinks next skill every 1.2 seconds
+            });
+        </script>
     </section>
 
     <!-- Projects Section -->
@@ -1914,6 +2173,9 @@
 
                 </div>
             </div>
+            <div style="text-align: right; margin-top: 2rem;">
+                <a href="https://github.com/Giritharan2409?tab=repositories" target="_blank" rel="noopener noreferrer" class="certificate-button" style="padding: 10px 25px; font-size: 1rem;">View More Projects ➔</a>
+            </div>
         </div>
     </section>
 
@@ -1924,12 +2186,12 @@
             <div class="certificates-grid">
                 <div class="certificate-card">
                     <div class="certificate-icon">
-                        <img src="https://www.oracle.com/favicon.ico" alt="Oracle Icon" style="height: 36px; width: 36px; margin-bottom: 1rem; border-radius: 6px;">
+                        <img src="https://www.servicenow.com/favicon.ico" alt="ServiceNow Icon" style="height: 40px; width: 40px; margin-top: 15px; margin-bottom: 0.5rem; border-radius: 6px;">
                     </div>
-                    <div class="certificate-title">Oracle Cloud Infrastructure 2025 Certified Generative AI Professional</div>
-                    <div class="certificate-issuer">Oracle</div>
-                    <div class="certificate-date">2025</div>
-                    <a href="https://drive.google.com/file/d/1Tcpx9t5QOu2J3DRdsxRyJvC7hQ_RlL36/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="certificate-button">View Certificate</a>
+                    <div class="certificate-title">ServiceNow Certified System Administrator</div>
+                    <div class="certificate-issuer">ServiceNow</div>
+                    <div class="certificate-date">2026</div>
+                    <a href="https://drive.google.com/file/d/15-hRNnYaDoKx41ScKu_DIsBI3Hyo7Sd1/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="certificate-button">View Certificate</a>
                 </div>
                 <div class="certificate-card">
                     <div class="certificate-icon">🗃️</div>
@@ -1946,11 +2208,13 @@
                     <a href="https://drive.google.com/file/d/13JZkmUZiFD8IOFqxO8mct0RCFKC3KSDZ/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="certificate-button">View Certificate</a>
                 </div>
                 <div class="certificate-card">
-                    <div class="certificate-icon">📈</div>
-                    <div class="certificate-title">Power BI Workshop</div>
-                    <div class="certificate-issuer">Office Master</div>
+                    <div class="certificate-icon">
+                        <img src="https://www.oracle.com/favicon.ico" alt="Oracle Icon" style="height: 36px; width: 36px; margin-bottom: 1rem; border-radius: 6px;">
+                    </div>
+                    <div class="certificate-title">Oracle Cloud Infrastructure 2025 Certified Generative AI Professional</div>
+                    <div class="certificate-issuer">Oracle</div>
                     <div class="certificate-date">2025</div>
-                    <a href="https://drive.google.com/file/d/12oM3GYNQBUWy6cxnib6OptVKbiOFl7zk/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="certificate-button">View Certificate</a>
+                    <a href="https://drive.google.com/file/d/1Tcpx9t5QOu2J3DRdsxRyJvC7hQ_RlL36/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="certificate-button">View Certificate</a>
                 </div>
                 <div class="certificate-card">
                     <div class="certificate-icon">💼</div>
@@ -1966,6 +2230,9 @@
                     <div class="certificate-date">2024</div>
                     <a href="https://drive.google.com/file/d/1ECMl4Fi37dkmf1aQ6URyJHto_xw2zhiP/view?usp=drive_link" class="certificate-button">View Certificate</a>
                 </div>
+            </div>
+            <div style="text-align: right; margin-top: 2rem;">
+                <a href="https://drive.google.com/drive/folders/1XZOyTOcUG3QrMQOjFLvXzqzisg-uU_VO?usp=drive_link" target="_blank" rel="noopener noreferrer" class="certificate-button" style="padding: 10px 25px; font-size: 1rem;">View More Certificates ➔</a>
             </div>
         </div>
     </section>
