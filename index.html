@@ -106,6 +106,7 @@
         body.light-mode #about,
         body.light-mode #education,
         body.light-mode #skills,
+        body.light-mode #experience,
         body.light-mode #projects,
         body.light-mode #certificates,
         body.light-mode #contact,
@@ -415,7 +416,7 @@
             z-index: 0;
         }
 
-        #home, #about, #skills, #projects, #certificates, #contact, .footer {
+        #home, #about, #skills, #experience, #projects, #certificates, #contact, .footer {
             background: transparent !important;
             position: relative;
             z-index: 1;
@@ -1676,9 +1677,10 @@
                 <li style="--i: 1;"><a href="#home">Home</a></li>
                 <li style="--i: 2;"><a href="#about">About</a></li>
                 <li style="--i: 3;"><a href="#skills">Skills</a></li>
-                <li style="--i: 4;"><a href="#projects">Projects</a></li>
-                <li style="--i: 5;"><a href="#certificates">Certificates</a></li>
-                <li style="--i: 6;"><a href="#contact">Contact</a></li>
+                <li style="--i: 4;"><a href="#experience">Experience</a></li>
+                <li style="--i: 5;"><a href="#projects">Projects</a></li>
+                <li style="--i: 6;"><a href="#certificates">Certificates</a></li>
+                <li style="--i: 7;"><a href="#contact">Contact</a></li>
             </ul>
             <div class="theme-toggle-container">
                 <button id="theme-toggle" class="on-off-toggle" title="Switch Theme">
@@ -2128,6 +2130,184 @@
                 }, 1200); // Blinks next skill every 1.2 seconds
             });
         </script>
+    </section>
+
+    <!-- Experience Section -->
+    <style>
+        #experience {
+            padding: 100px 0;
+            position: relative;
+            z-index: 1;
+        }
+        .experience-timeline {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 0;
+        }
+        .experience-timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            width: 2px;
+            height: 100%;
+            background: #5a45ff;
+            transform: translateX(-50%);
+        }
+        .experience-item {
+            position: relative;
+            margin-bottom: 60px;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+        }
+        .experience-item:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+        .experience-dot {
+            position: absolute;
+            left: 50%;
+            top: 15px;
+            transform: translateX(-50%);
+            background: #6c5ce7;
+            color: white;
+            padding: 6px 18px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            box-shadow: 0 0 20px rgba(108, 92, 231, 0.8);
+            z-index: 2;
+        }
+        .experience-content {
+            width: 45%;
+            background: #232332;
+            padding: 25px;
+            border-radius: 12px;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .experience-content:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(108, 92, 231, 0.3);
+            border-color: rgba(108, 92, 231, 0.5);
+        }
+        /* Arrows */
+        .experience-item:nth-child(odd) .experience-content::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            right: -10px;
+            border-width: 10px 0 10px 10px;
+            border-style: solid;
+            border-color: transparent transparent transparent #232332;
+        }
+        .experience-item:nth-child(even) .experience-content::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: -10px;
+            border-width: 10px 10px 10px 0;
+            border-style: solid;
+            border-color: transparent #232332 transparent transparent;
+        }
+        .experience-title {
+            color: #8c7dff;
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        .experience-company {
+            color: #e8e8e8;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        .experience-desc {
+            color: #b0bec5;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            text-align: justify;
+        }
+        
+        body.light-mode .experience-content {
+            background: rgba(255, 255, 255, 0.85);
+            border: 2px solid #B0DB9C !important;
+            color: #222;
+        }
+        body.light-mode .experience-item:nth-child(odd) .experience-content::before {
+            border-color: transparent transparent transparent #B0DB9C;
+        }
+        body.light-mode .experience-item:nth-child(even) .experience-content::before {
+            border-color: transparent #B0DB9C transparent transparent;
+        }
+        body.light-mode .experience-company, body.light-mode .experience-desc {
+            color: #222 !important;
+        }
+        
+        @media (max-width: 768px) {
+            .experience-timeline::before {
+                left: 30px;
+            }
+            .experience-item, .experience-item:nth-child(even) {
+                flex-direction: column;
+                align-items: flex-end;
+            }
+            .experience-dot {
+                left: 30px;
+            }
+            .experience-content {
+                width: calc(100% - 80px);
+                margin-top: 10px;
+            }
+            .experience-item:nth-child(odd) .experience-content::before,
+            .experience-item:nth-child(even) .experience-content::before {
+                left: -10px;
+                right: auto;
+                border-width: 10px 10px 10px 0;
+                border-color: transparent #232332 transparent transparent;
+            }
+            body.light-mode .experience-item:nth-child(odd) .experience-content::before,
+            body.light-mode .experience-item:nth-child(even) .experience-content::before {
+                border-color: transparent #B0DB9C transparent transparent;
+            }
+        }
+    </style>
+    <section id="experience">
+        <div class="container">
+            <h2 class="section-title">Internship Experiences</h2>
+            <div class="experience-timeline">
+                <div class="experience-item">
+                    <div class="experience-dot">2026</div>
+                    <div class="experience-content">
+                        <div class="experience-title">Backend Developer</div>
+                        <div class="experience-company">MoviCloud Labs Pvt Ltd, Dindigul</div>
+                        <div class="experience-desc">
+                            <div style="margin-bottom: 8px; color: #64b5f6; font-weight: 500;">Technologies: Python, FastAPI, MongoDB</div>
+                            Developed and implemented scalable backend solutions for two full-stack applications: College Management System and Restaurant Management System. Designed and developed using FastAPI and integrated MongoDB for efficient data storage and retrieval.
+                        </div>
+                    </div>
+                </div>
+                <div class="experience-item">
+                    <div class="experience-dot">2025</div>
+                    <div class="experience-content">
+                        <div class="experience-title">Full Stack Developer</div>
+                        <div class="experience-company">Micro IT</div>
+                        <div class="experience-desc">Developing and maintaining full-stack web applications, ensuring seamless integration of frontend interfaces and backend logic.</div>
+                    </div>
+                </div>
+                <div class="experience-item">
+                    <div class="experience-dot">2024</div>
+                    <div class="experience-content">
+                        <div class="experience-title">Web Developer</div>
+                        <div class="experience-company">Internship</div>
+                        <div class="experience-desc">Contributed to the development of dynamic web pages and improved user interfaces for better user experience.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 
     <!-- Projects Section -->
