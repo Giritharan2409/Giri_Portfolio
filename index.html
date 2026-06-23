@@ -2612,12 +2612,21 @@
 
         skillsObserver.observe(skillsSection);
 
-        // Deep 3D navbar scroll effects
+        // Deep 3D navbar scroll effects and hide on scroll down
+        let lastScrollTop = 0;
         window.addEventListener('scroll', () => {
             const navbar = document.querySelector('.navbar');
             const scrollY = window.scrollY;
             const maxScroll = 200;
             const intensity = Math.min(scrollY / maxScroll, 1);
+            
+            // Hide navbar on scroll down, show on scroll up
+            if (scrollY > lastScrollTop && scrollY > 100) {
+                navbar.style.transform = 'translateY(-100%)';
+            } else {
+                navbar.style.transform = 'translateY(0)';
+            }
+            lastScrollTop = scrollY <= 0 ? 0 : scrollY;
             
             if (scrollY > 50) {
                 navbar.style.animation = 'deep3DGlow 2s ease-in-out infinite';
